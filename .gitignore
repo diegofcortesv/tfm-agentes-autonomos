@@ -1,0 +1,12 @@
+# .gitignore
+# Entorno virtual
+venv_tfm_agents/
+
+# Secretos y configuración local
+.env
+gcp-credentials.json
+
+# Caché de Python y otros
+__pycache__/
+*.pyc
+.vscode/
