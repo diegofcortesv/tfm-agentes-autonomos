@@ -1,33 +1,22 @@
 # customer_service_agent_app/subagents/knowledge_agent/tools.py
-from typing import Dict, Any
-from sentence_transformers import SentenceTransformer
-from customer_service_agent_app.repository.knowledge_repository import KnowledgeRepository
 
-class KnowledgeBaseTool:
-    def __init__(self):
-        self.repository = KnowledgeRepository()
-        # Carga el modelo una vez al iniciar la herramienta.
-        print("INFO: Cargando modelo de embeddings para Knowledge Agent...")
-        self.model = SentenceTransformer('all-MiniLM-L6-v2')
-        print("INFO: Modelo de embeddings cargado.")
-    
-    async def search_knowledge_base(self, customer_query: str, issue_type: str = "") -> Dict[str, Any]:
-        """Busca en la base de conocimientos usando búsqueda semántica."""
-        if not customer_query:
-            return {"error": "No query provided"}
+import os
+from google.adk.tools import MCPToolset
+from google.adk.tools.mcp_tool import StdioConnectionParams
+from mcp.client.stdio import StdioServerParameters
 
-        print(f"INFO: Realizando búsqueda semántica para: '{customer_query}'")
-        query_embedding = self.model.encode(customer_query).tolist()
-        
-        search_results = await self.repository.semantic_search(query_embedding, top_k=3)
-        
-        if not search_results:
-            return {
-                "found": False,
-                "message": "No se encontraron soluciones relevantes en la base de conocimientos.",
-            }
+# Obtener la ruta absoluta del proyecto
+project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../.."))
+mcp_server_path = os.path.join(project_root, "knowledge_mcp_server_standalone.py")
 
-        return {
-            "found": True,
-            "solutions": search_results
-        }
+# Crear el MCPToolset para conectar con el servidor MCP de conocimiento
+knowledge_search_toolset = MCPToolset(
+    connection_params=StdioConnectionParams(
+        server_params=StdioServerParameters(
+            command="python",
+            args=[mcp_server_path],
+            cwd=project_root
+        ),
+        timeout=30.0  # Timeout más largo para carga de modelos y BD
+    )
+)

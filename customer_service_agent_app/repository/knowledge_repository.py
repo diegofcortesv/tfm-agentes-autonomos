@@ -18,8 +18,6 @@ class KnowledgeRepository:
         """Obtiene una conexión a la BD y la prepara para pgvector."""
         conn = await asyncpg.connect(**self.connection_params)
         
-        # ¡CAMBIO CLAVE! Esta es la función oficial de la librería pgvector
-        # para registrar el tipo 'vector' en la conexión activa.
         await register_vector(conn)
         
         return conn
@@ -28,15 +26,14 @@ class KnowledgeRepository:
         """Realiza una búsqueda por similitud de coseno en la knowledge_base."""
         conn = await self.get_connection()
         try:
-            # La sintaxis de la consulta es correcta. El problema estaba en la conexión.
-            # pgvector usa el operador <=> para la distancia coseno. 1 - distancia = similitud.
+
             query = """
                 SELECT title, content, 1 - (embedding <=> $1) AS similarity
                 FROM knowledge_base
                 ORDER BY similarity DESC
                 LIMIT $2
             """
-            # Pasamos la lista de Python directamente. pgvector y asyncpg se encargarán de la conversión.
+
             results = await conn.fetch(query, query_embedding, top_k)
             return [dict(row) for row in results]
         finally:

@@ -1,252 +1,311 @@
-# TFM: Arquitectura de Agentes Autónomos para Servicio al Cliente con GCP y RAG
+# Arquitectura de Agentes Autónomos para Servicio al Cliente
 
+**Trabajo de Fin de Máster - VIU**  
 **Autor**: Diego Fernando Cortes Villa  
-**Tutor**: Gustavo Bouso
-**Máster**: Máster en Big Data y Ciencia de Datos - VIU
-
----
-
-## Tabla de Contenidos
-1. [Resumen del Proyecto](#resumen-del-proyecto)
-2. [Características Principales](#características-principales)
-3. [Arquitectura del Sistema](#arquitectura-del-sistema)
-4. [Stack Tecnológico](#stack-tecnológico)
-5. [Configuración del Entorno de Desarrollo](#configuración-del-entorno-de-desarrollo)
-6. [Despliegue de la Infraestructura en GCP](#despliegue-de-la-infraestructura-en-gcp)
-7. [Cómo Ejecutar y Probar el Sistema](#cómo-ejecutar-y-probar-el-sistema)
-8. [Ejecución de Pruebas Unitarias](#ejecución-de-pruebas-unitarias)
-9. [Estructura del Proyecto](#estructura-del-proyecto)
-10. [Próximos Pasos](#próximos-pasos)
+**Tutor**: Gustavo Martín Bouso
 
 ---
 
 ## Resumen del Proyecto
 
-Este proyecto, desarrollado como Trabajo de Fin de Máster (TFM), presenta una arquitectura avanzada de agentes autónomos para la automatización del servicio al cliente. El sistema utiliza un enfoque modular con múltiples agentes especializados que colaboran para proporcionar respuestas personalizadas, contextuales y basadas en conocimiento.
+Sistema modular de agentes autónomos que automatiza el servicio al cliente usando IA generativa. Implementa una arquitectura jerárquica con agentes especializados que colaboran para proporcionar respuestas personalizadas, contextuales y basadas en conocimiento.
 
-La arquitectura se migró de un prototipo local en memoria a una solución robusta y escalable en **Google Cloud Platform (GCP)**, utilizando **Cloud SQL para PostgreSQL** como base de datos persistente y la extensión **pgvector** para habilitar capacidades de **Generación Aumentada por Recuperación (RAG)**. Esto permite que el sistema no solo gestione el estado de las conversaciones, sino que también "aprenda" y recupere información de una base de conocimiento interna mediante búsqueda semántica.
+### Características Principales
 
-El sistema está orquestado por un agente raíz que paraleliza el análisis de contexto, sentimiento y conocimiento, para luego sintetizar una respuesta coherente y empática, adaptada al perfil y la necesidad específica de cada cliente.
-
----
-
-## Características Principales
-
-- **Arquitectura Modular de Agentes**: El sistema se compone de subagentes especializados (análisis de contexto, sentimiento, conocimiento, prioridad y síntesis de respuesta).
-- **Procesamiento Paralelo**: Análisis simultáneo de múltiples facetas de la solicitud del cliente para una mayor eficiencia.
-- **Memoria Persistente**: Las interacciones con los clientes se almacenan en una base de datos PostgreSQL, permitiendo al sistema tener un "recuerdo" de conversaciones pasadas y mejorar el contexto en futuras sesiones.
-- **Generación Aumentada por Recuperación (RAG)**: El `Knowledge Agent` utiliza embeddings vectoriales y `pgvector` para realizar búsquedas semánticas en una base de conocimientos, proporcionando respuestas precisas y basadas en hechos.
-- **Infraestructura como Código (IaC)**: El setup del proyecto y la infraestructura en GCP están automatizados mediante scripts de shell, garantizando la reproducibilidad del entorno.
-- **Interfaz de Pruebas Interactiva**: Se utiliza la herramienta `adk web` de Google para probar el flujo completo de agentes de forma visual e interactiva.
+- **Orquestación Inteligente**: Root Agent coordina agentes especializados con procesamiento paralelo
+- **Gestión de Contexto**: Preservación completa del historial conversacional en PostgreSQL
+- **RAG Semántico**: Búsqueda inteligente en base de conocimiento usando embeddings vectoriales
+- **Protocolo MCP**: Comunicación estandarizada entre agentes y herramientas externas
+- **Infraestructura Cloud**: Desplegado en Google Cloud Platform con Cloud SQL
 
 ---
 
 ## Arquitectura del Sistema
 
-El flujo de información sigue un patrón de "análisis paralelo seguido de síntesis secuencial":
-
 ```mermaid
-graph TD
+graph TB
     subgraph "Usuario"
-        A[Mensaje del Cliente]
+        U[Cliente]
     end
-
-    subgraph "Aplicación de Agentes (ADK)"
-        B(Root Agent - Sequential)
-        C(Parallel Analyzer)
-        D[Context Analyzer]
-        E[Sentiment Analyzer]
-        F[Knowledge Agent]
-        G[Priority Agent]
-        H(Response Synthesizer)
-    end
-
-    subgraph "Backend y GCP"
-        I[Cloud SQL - PostgreSQL]
-        J[Base de Conocimiento con pgvector]
-        K[API de Gemini]
-    end
-
-    A --> B
-    B --> C
-    C --> D
-    C --> E
-    C --> F
-    C --> G
     
-    D --> I
-    E --> I
-    F --> J
-    G --> I
-
-    D -- Contexto --> H
-    E -- Sentimiento --> H
-    F -- Conocimiento RAG --> H
-    G -- Prioridad --> H
+    subgraph "ADK Interface"
+        WEB[Interfaz Web<br/>localhost:8000]
+        ROOT[Root Agent]
+        PARALLEL[Parallel Analyzer]
+    end
     
-    H --> K
-    K -- Respuesta Final --> B
-    B --> L[Respuesta Sintetizada]
-
-    style A fill:#f9f,stroke:#333,stroke-width:2px
-    style L fill:#ccf,stroke:#333,stroke-width:2px
-    style I fill:#dbf,stroke:#333,stroke-width:2px
-    style J fill:#dbf,stroke:#333,stroke-width:2px
-    style K fill:#f80,stroke:#333,stroke-width:2px
+    subgraph "Agentes Especializados"
+        CTX[Context Analyzer]
+        SENT[Sentiment Analyzer] 
+        KNOW[Knowledge Agent]
+        PRIO[Priority Agent]
+        SYNTH[Response Synthesizer]
+    end
+    
+    subgraph "Protocolo MCP"
+        MCP[MCP Server]
+        EMBEDDING[SentenceTransformer]
+    end
+    
+    subgraph "Google Cloud Platform"
+        POSTGRES[Cloud SQL PostgreSQL]
+        PGVECTOR[pgvector Extension]
+        GEMINI[Gemini 2.0 Flash]
+    end
+    
+    U --> WEB
+    WEB --> ROOT
+    ROOT --> PARALLEL
+    
+    PARALLEL --> CTX
+    PARALLEL --> SENT
+    PARALLEL --> KNOW
+    PARALLEL --> PRIO
+    
+    CTX --> POSTGRES
+    SENT --> POSTGRES
+    PRIO --> POSTGRES
+    
+    KNOW --> MCP
+    MCP --> EMBEDDING
+    MCP --> POSTGRES
+    POSTGRES --> PGVECTOR
+    
+    CTX --> SYNTH
+    SENT --> SYNTH
+    KNOW --> SYNTH
+    PRIO --> SYNTH
+    
+    SYNTH --> GEMINI
+    GEMINI --> ROOT
+    ROOT --> WEB
+    WEB --> U
+    
+    classDef user fill:#e1f5fe
+    classDef adk fill:#f3e5f5
+    classDef agent fill:#fff3e0
+    classDef mcp fill:#fce4ec
+    classDef gcp fill:#e8f5e8
+    
+    class U,WEB user
+    class ROOT,PARALLEL adk
+    class CTX,SENT,KNOW,PRIO,SYNTH agent
+    class MCP,EMBEDDING mcp
+    class POSTGRES,PGVECTOR,GEMINI gcp
 ```
+
+### Flujo de Procesamiento
+
+1. **Usuario** envía consulta a través de la interfaz web
+2. **Root Agent** coordina el proceso y activa *Parallel Analyzer*
+3. **Análisis Paralelo** ejecuta simultáneamente:
+   - **Context Analyzer**: Extrae información del cliente y historial
+   - **Sentiment Analyzer**: Detecta emociones para respuesta empática
+   - **Knowledge Agent**: Búsqueda RAG en base de conocimiento via MCP
+   - **Priority Agent**: Clasifica urgencia y determina escalamiento
+4. **Response Synthesizer** consolida resultados usando *Gemini*
+5. **Respuesta Final** personalizada y contextualizada al usuario
 
 ---
 
 ## Stack Tecnológico
 
-- **Backend**: Python 3.12+
-- **Framework de Agentes**: Google Agent Development Kit (ADK)
-- **Base de Datos**: Google Cloud SQL para PostgreSQL 15 con la extensión `pgvector`.
-- **Modelos de Lenguaje**: Google Gemini 2.0 Flash
-- **Búsqueda Semántica**: `sentence-transformers`
-- **Infraestructura Cloud**: Google Cloud Platform (GCP)
-- **Automatización**: Bash Scripts
+- **Framework**: Google Agent Development Kit (ADK)
+- **Protocolo**: Model Context Protocol (MCP)
+- **Base de Datos**: Google Cloud SQL PostgreSQL 15 + pgvector
+- **IA**: Google Gemini 2.0 Flash + SentenceTransformers
+- **Cloud**: Google Cloud Platform
+- **Lenguaje**: Python 3.12+
 
 ---
 
-## Configuración del Entorno de Desarrollo
+## 🚀 Instalación (Primera Vez)
 
-Siga estos pasos para configurar el entorno en una máquina local (Linux/macOS).
+### Prerrequisitos
+- Python 3.12+
+- Google Cloud SDK
+- Git
 
-### 1. Prerrequisitos
-Asegúrese de tener instalados Python (3.9+), Google Cloud SDK y Docker. Puede verificar su entorno con el script:
+### 1. Configuración Local
 ```bash
-python3 scripts/verify_environment.py
-```
-
-### 2. Clonar y Preparar el Proyecto
-```bash
-git clone [URL_DE_TU_REPOSITORIO_GIT]
+# Clonar repositorio
+git clone [URL_REPOSITORIO]
 cd tfm-agentes-autonomos
-```
 
-### 3. Ejecutar el Script de Configuración Local
-Este script creará el entorno virtual, el `.gitignore` y otros archivos de configuración.
-```bash
-chmod +x scripts/00_setup_local_env.sh
+# Configurar entorno
 ./scripts/00_setup_local_env.sh
-```
-
-### 4. Configurar Variables de Entorno
-Cree un archivo `.env` a partir de la plantilla.
-```bash
-cp .env.example .env
-```
-Ahora, edite el archivo `.env` y añada su **API Key de Google AI**. El resto de las variables se rellenarán automáticamente con los scripts de infraestructura.
-
-### 5. Instalar Dependencias
-Asegúrese de que su entorno virtual está activado y luego instale los paquetes de Python.
-```bash
 source venv_tfm_agents/bin/activate
+
+# Instalar dependencias
 pip install -r requirements.txt
+pip install --upgrade google-adk
+
+# Configurar variables de entorno
+cp .env.example .env
+# Editar .env y añadir tu GOOGLE_API_KEY
 ```
 
----
-
-## Despliegue de la Infraestructura en GCP
-
-Estos scripts solo deben ejecutarse **una vez** para crear toda la infraestructura necesaria en la nube.
-
-### 1. Configurar el Proyecto de GCP
-Este script configura el proyecto, las APIs y la cuenta de servicio. **Requiere intervención manual para habilitar la facturación.**```bash
+### 2. Infraestructura GCP (Solo primera vez)
+```bash
+# Configurar proyecto GCP
 ./scripts/01_setup_gcp_project.sh
-```
 
-### 2. Crear la Instancia de Cloud SQL
-Este script crea la instancia de PostgreSQL, la base de datos, los usuarios y actualiza el archivo `.env` con las contraseñas generadas.
-```bash
+# Crear instancia Cloud SQL
 ./scripts/02_setup_cloudsql.sh
-```
 
-### 3. Inicializar la Base de Datos
-Este script inicia el Cloud SQL Auth Proxy, habilita `pgvector`, crea todas las tablas e inserta los datos de ejemplo.
-```bash
+# Inicializar base de datos
 ./scripts/03_run_proxy_and_init_db.sh
 ```
-*Nota: Este script dejará el proxy en ejecución y se detendrá automáticamente al finalizar. Para el desarrollo diario, use `connect_proxy.sh`.*
 
 ---
 
-## Cómo Ejecutar y Probar el Sistema
+## 📱 Uso Diario
 
-Para el desarrollo y las pruebas diarias, siga este flujo de trabajo con dos terminales.
+### Iniciar el Sistema
 
-### Terminal 1: Iniciar el Proxy
+**Terminal 1: Proxy de Base de Datos**
 ```bash
-# Activar entorno virtual
 source venv_tfm_agents/bin/activate
-
-# Iniciar la conexión segura y dejarla corriendo
 ./scripts/connect_proxy.sh
 ```
-**Deje esta terminal abierta.** Es su túnel a la base de datos.
+*Mantener ejecutándose durante toda la sesión*
 
-### Terminal 2: Iniciar el Servidor Web del ADK
+**Terminal 2: Interfaz ADK**
 ```bash
-# Activar entorno virtual
 source venv_tfm_agents/bin/activate
-
-# Iniciar la interfaz de pruebas
-adk web main:root_agent
+adk web customer_service_agent_app
 ```
 
-### Navegador Web
-Abra la URL `http://127.0.0.1:8000` en su navegador. Use la interfaz de chat para interactuar con el agente. La pestaña "Agent Trajectory" mostrará el flujo de ejecución completo.
+**Navegador**: http://127.0.0.1:8000
 
----
+### Ejemplos de Prueba
 
-## Ejecución de Pruebas Unitarias
-
-Para verificar componentes específicos del sistema, puede ejecutar pruebas individuales. Asegúrese de que el **Cloud SQL Proxy esté activo** (Terminal 1) antes de ejecutar las pruebas.
-
-### Probar Conexión y pgvector
-```bash
-python tests/test_vectors.py
+**Escalamiento Crítico**:
+```
+¡URGENTE! El servidor está caído y no puedo procesar pedidos
 ```
 
-### Probar Herramienta de Contexto
-```bash
-python tests/test_context_analyzer.py
+**Búsqueda Técnica**:
+```
+problema de conexión base de datos postgresql timeout
 ```
 
-### Probar Persistencia de Memoria
-```bash
-python tests/test_persistence.py
+**Consulta con Contexto**:
 ```
+Cliente CUST_003 reporta error crítico: fallo de conexión a base de datos en sistema de facturación
+```
+
+**Seguimiento**:
+```
+Soy CUST_003, ¿hay novedades sobre mi caso de ayer?
+```
+
+### Interpretación de Resultados
+
+En la pestaña **"Agent Trajectory"** verás el flujo completo:
+- Root Agent coordinando el proceso
+- Parallel Analyzer distribuyendo tareas
+- Cada agente especializado ejecutando su función
+- Knowledge Agent realizando búsquedas RAG reales
+- Response Synthesizer generando respuesta final
 
 ---
 
 ## Estructura del Proyecto
 
 ```
-.
-├── config/                 # Carga y gestión de configuración centralizada (.env)
-├── customer_service_agent_app/ # Código fuente principal de la aplicación
-│   ├── repository/         # Capa de acceso a la base de datos
-│   └── subagents/          # Módulos para cada agente especializado
-├── scripts/                # Scripts de automatización para setup y conexión
-├── tests/                  # Pruebas unitarias y de integración
-├── .env                    # Variables de entorno locales (NO EN GIT)
-├── main.py                 # Punto de entrada para el servidor ADK
-└── ...
+tfm-agentes-autonomos/
+├── config/                        # Configuración centralizada
+├── customer_service_agent_app/     # Código fuente principal
+│   ├── agent.py                       # Aplicación principal ADK
+│   ├── repository/                 # Acceso a datos
+│   │   ├── customer_repository.py     # Gestión de clientes
+│   │   ├── knowledge_repository.py    # Base de conocimiento + RAG
+│   │   ├── priority_repository.py     # Reglas de priorización
+│   │   └── sentiment_repository.py    # Análisis de sentimientos
+│   └── subagents/                  # Agentes especializados
+│       ├── context_analyzer/       # Análisis de contexto
+│       ├── knowledge_agent/        # Búsqueda RAG con MCP
+│       ├── priority_agent/         # Clasificación de urgencia
+│       ├── response_synthesizer/   # Síntesis de respuesta
+│       └── sentiment_agent/        # Análisis emocional
+├── scripts/                       # Automatización y setup
+├── tests/                         # Pruebas unitarias
+├── knowledge_mcp_server_simple.py    # Servidor MCP pruebas
+├── knowledge_mcp_server_standalone.py # Servidor MCP producción
+└── requirements.txt               # Dependencias Python
 ```
 
 ---
 
-## Próximos Pasos
+## ⚠️ Troubleshooting
 
-- **Añadir más artículos** a la base de conocimiento para mejorar la capacidad del RAG.
-- **Implementar una lógica de reglas más dinámica** en el `Priority Agent` para leerlas desde la base de datos.
-- **Contenerizar la aplicación** con el `Dockerfile` y desplegarla en **Cloud Run**.
-- **Configurar CI/CD** con Cloud Build para automatizar las pruebas y los despliegues.
+### Problema: "Timed out while waiting for response"
+**Solución**: Verificar que el Cloud SQL Proxy esté ejecutándose
+```bash
+ps aux | grep cloud_sql_proxy
+```
+
+### Problema: Knowledge Agent no encuentra información
+**Solución**: Usar servidor MCP completo
+```python
+# En customer_service_agent_app/subagents/knowledge_agent/tools.py
+args=["knowledge_mcp_server_standalone.py"]  # En lugar de simple.py
+```
+
+### Problema: Error de conexión a base de datos
+**Solución**: Verificar variables de entorno
+```bash
+python -c "
+import os
+from dotenv import load_dotenv
+load_dotenv()
+print('DB_USER:', os.getenv('DB_USER'))
+print('DB_NAME:', os.getenv('DB_NAME'))
+"
+```
 
 ---
 
-## Licencia
+## 📝 Pruebas del Sistema
 
-Este proyecto está bajo la Licencia MIT.
+### Probar Componentes Individuales
+```bash
+# Verificar conexión y pgvector
+python tests/test_vectors.py
+
+# Probar análisis de contexto
+python tests/test_context_analyzer.py
+
+# Probar flujo completo
+python tests/test_full_agent_flow.py
+```
+
+### Probar Servidor MCP
+```bash
+# Servidor completo con BD
+python knowledge_mcp_server_standalone.py
+
+# Servidor simple para pruebas
+python knowledge_mcp_server_simple.py
+```
+
+---
+
+## Resultados Esperados
+
+- **Tiempo de respuesta**: 3-5 segundos
+- **Contexto preservado**: 100% entre agentes
+- **Búsqueda semántica**: Encuentra información relevante aunque no coincidan palabras exactas
+- **Escalamiento automático**: Detecta urgencia y prioriza automáticamente
+- **Personalización**: Adapta respuesta al perfil del cliente y sentimiento detectado
+
+---
+
+##  Licencia
+
+MIT License - Uso académico y comercial permitido con atribución.
+
+---
+
+**© 2025 Diego Fernando Cortes Villa - Universidad Internacional de Valencia**
