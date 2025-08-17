@@ -1,0 +1,15 @@
+# Dependencies for MCP server and knowledge base functionality
+sentence-transformers==3.0.1
+python-dotenv==1.0.1
+mcp==1.0.0
+
+# Database dependencies
+asyncpg==0.29.0
+pgvector==0.2.4
+pydantic-settings==2.5.2
+
+# Google Agent Development Kit
+google-adk[database]==0.3.0
+
+# SQLAlchemy for ORM functionality
+sqlalchemy==2.0.23
