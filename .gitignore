@@ -10,3 +10,7 @@ gcp-credentials.json
 __pycache__/
 *.pyc
 .vscode/
+
+STARTUP_INSTRUCTIONS.txt
+knowledge_mcp_server_standalone.py.backup
+knowledge_mcp_server_standalone.py.original_backup
