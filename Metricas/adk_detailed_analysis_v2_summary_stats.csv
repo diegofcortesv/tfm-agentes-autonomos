@@ -1,0 +1,2 @@
+total_queries,sessions_analyzed,avg_response_time,queries_with_response_time,rag_success_rate,urgency_rate,high_urgency_rate,escalation_risk_high_rate,queries_with_customer_id,contextual_queries,avg_sentiment_negative_keywords,avg_sentiment_urgency_keywords,queries_consistent_with_sentiment_analyzer
+59,6,9.16965021117259,59,94.91525423728814,72.88135593220339,20.33898305084746,1.694915254237288,12,1,0.5084745762711864,0.2542372881355932,20

@@ -1,0 +1,205 @@
+{
+  "metrics": [
+    {
+      "timestamp": "2025-08-18T18:30:42.273874",
+      "query": "problema de conexi\u00f3n base de datos postgresql",
+      "latency_ms": 4748.59,
+      "similarity_scores": [
+        0.8,
+        0.8
+      ],
+      "fallback_used": "semantic",
+      "response_length": 368,
+      "results_count": 2,
+      "error": null
+    },
+    {
+      "timestamp": "2025-08-18T18:31:54.464418",
+      "query": "error timeout servidor web nginx",
+      "latency_ms": 1534.53,
+      "similarity_scores": [
+        0.8,
+        0.8
+      ],
+      "fallback_used": "semantic",
+      "response_length": 368,
+      "results_count": 2,
+      "error": null
+    },
+    {
+      "timestamp": "2025-08-18T18:34:43.518452",
+      "query": "fallo autenticaci\u00f3n LDAP directorio activo",
+      "latency_ms": 1324.3,
+      "similarity_scores": [
+        0.8,
+        0.8
+      ],
+      "fallback_used": "semantic",
+      "response_length": 368,
+      "results_count": 2,
+      "error": null
+    },
+    {
+      "timestamp": "2025-08-18T18:36:16.642553",
+      "query": "servidor aplicaciones no responde puerto 8080",
+      "latency_ms": 1408.23,
+      "similarity_scores": [
+        0.8,
+        0.8
+      ],
+      "fallback_used": "semantic",
+      "response_length": 368,
+      "results_count": 2,
+      "error": null
+    },
+    {
+      "timestamp": "2025-08-18T18:37:48.622038",
+      "query": "certificados SSL expirados sitio web",
+      "latency_ms": 1671.15,
+      "similarity_scores": [
+        0.8,
+        0.8
+      ],
+      "fallback_used": "semantic",
+      "response_length": 368,
+      "results_count": 2,
+      "error": null
+    },
+    {
+      "timestamp": "2025-08-18T18:38:58.213490",
+      "query": "error 502 bad gateway reverse proxy",
+      "latency_ms": 1426.08,
+      "similarity_scores": [
+        0.8,
+        0.8
+      ],
+      "fallback_used": "semantic",
+      "response_length": 368,
+      "results_count": 2,
+      "error": null
+    },
+    {
+      "timestamp": "2025-08-18T18:39:54.309469",
+      "query": "problema memoria heap java aplicaci\u00f3n",
+      "latency_ms": 1246.1,
+      "similarity_scores": [
+        0.8,
+        0.8
+      ],
+      "fallback_used": "semantic",
+      "response_length": 368,
+      "results_count": 2,
+      "error": null
+    },
+    {
+      "timestamp": "2025-08-18T18:41:10.415104",
+      "query": "conexi\u00f3n rechazada mysql puerto 3306",
+      "latency_ms": 1612.41,
+      "similarity_scores": [
+        0.8,
+        0.8
+      ],
+      "fallback_used": "semantic",
+      "response_length": 368,
+      "results_count": 2,
+      "error": null
+    },
+    {
+      "timestamp": "2025-08-18T18:42:26.834242",
+      "query": "timeout consultas lentas base datos",
+      "latency_ms": 1235.67,
+      "similarity_scores": [
+        0.8,
+        0.8
+      ],
+      "fallback_used": "semantic",
+      "response_length": 368,
+      "results_count": 2,
+      "error": null
+    },
+    {
+      "timestamp": "2025-08-18T18:43:43.780699",
+      "query": "error permisos archivo configuraci\u00f3n",
+      "latency_ms": 1724.64,
+      "similarity_scores": [
+        0.8,
+        0.8
+      ],
+      "fallback_used": "semantic",
+      "response_length": 368,
+      "results_count": 2,
+      "error": null
+    },
+    {
+      "timestamp": "2025-08-18T18:44:50.015092",
+      "query": "problema balanceador carga alta disponibilidad",
+      "latency_ms": 1288.36,
+      "similarity_scores": [
+        0.8,
+        0.8
+      ],
+      "fallback_used": "semantic",
+      "response_length": 368,
+      "results_count": 2,
+      "error": null
+    },
+    {
+      "timestamp": "2025-08-18T18:46:00.297084",
+      "query": "fallo sincronizaci\u00f3n r\u00e9plica maestro esclavo",
+      "latency_ms": 1373.19,
+      "similarity_scores": [
+        0.8,
+        0.8
+      ],
+      "fallback_used": "semantic",
+      "response_length": 368,
+      "results_count": 2,
+      "error": null
+    },
+    {
+      "timestamp": "2025-08-18T18:47:07.336972",
+      "query": "error configuraci\u00f3n firewall puerto bloqueado",
+      "latency_ms": 1302.49,
+      "similarity_scores": [
+        0.8,
+        0.8
+      ],
+      "fallback_used": "semantic",
+      "response_length": 368,
+      "results_count": 2,
+      "error": null
+    },
+    {
+      "timestamp": "2025-08-18T18:48:00.013759",
+      "query": "problema cache redis sesiones usuario",
+      "latency_ms": 1373.92,
+      "similarity_scores": [
+        0.8,
+        0.8
+      ],
+      "fallback_used": "semantic",
+      "response_length": 368,
+      "results_count": 2,
+      "error": null
+    },
+    {
+      "timestamp": "2025-08-18T18:49:41.714034",
+      "query": "error backup incremental base datos",
+      "latency_ms": 1572.48,
+      "similarity_scores": [
+        0.8,
+        0.8
+      ],
+      "fallback_used": "semantic",
+      "response_length": 368,
+      "results_count": 2,
+      "error": null
+    }
+  ],
+  "summary": {
+    "total_queries": 15,
+    "error_count": 0,
+    "last_updated": "2025-08-18T18:49:41.714798",
+    "avg_latency": 1656.1426666666666
+  }
+}

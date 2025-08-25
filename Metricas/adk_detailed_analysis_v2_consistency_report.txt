@@ -1,0 +1,29 @@
+============================================================
+REPORTE DE CONSISTENCIA CON SENTIMENTANALYZER
+============================================================
+
+Total de consultas analizadas: 59
+Consultas marcadas como 'high urgency': 12
+Porcentaje de urgencia alta: 20.3%
+
+DISTRIBUCIÓN POR NIVEL DE URGENCIA:
+  normal: 39 (66.1%)
+  high: 12 (20.3%)
+  medium: 8 (13.6%)
+
+DISTRIBUCIÓN POR RIESGO DE ESCALACIÓN:
+  low: 52 (88.1%)
+  medium: 6 (10.2%)
+  high: 1 (1.7%)
+
+EJEMPLOS DE CONSULTAS DE ALTA URGENCIA DETECTADAS:
+  • "error timeout servidor web nginx..."
+    Score: 4, Keywords: 
+  • "fallo autenticación LDAP directorio activo..."
+    Score: 3, Keywords: 
+  • "servidor aplicaciones no responde puerto 8080..."
+    Score: 3, Keywords: 
+  • "timeout consultas lentas base datos..."
+    Score: 3, Keywords: 
+  • "fallo sincronización réplica maestro esclavo..."
+    Score: 3, Keywords: 

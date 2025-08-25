@@ -1,0 +1,153 @@
+{
+  "metrics": [
+    {
+      "timestamp": "2025-08-18T19:00:40.735204",
+      "query": "error cr\u00edtico sistema facturaci\u00f3n cliente CUST_001",
+      "latency_ms": 1280.52,
+      "similarity_scores": [
+        0.8,
+        0.8
+      ],
+      "fallback_used": "semantic",
+      "response_length": 368,
+      "results_count": 2,
+      "error": null
+    },
+    {
+      "timestamp": "2025-08-18T19:01:35.431365",
+      "query": "soporte urgente base datos cliente premium",
+      "latency_ms": 1360.71,
+      "similarity_scores": [
+        0.8,
+        0.8
+      ],
+      "fallback_used": "semantic",
+      "response_length": 368,
+      "results_count": 2,
+      "error": null
+    },
+    {
+      "timestamp": "2025-08-18T19:02:47.843229",
+      "query": "problema autenticaci\u00f3n cliente gold tier",
+      "latency_ms": 2630.89,
+      "similarity_scores": [
+        0.8,
+        0.8
+      ],
+      "fallback_used": "semantic",
+      "response_length": 368,
+      "results_count": 2,
+      "error": null
+    },
+    {
+      "timestamp": "2025-08-18T19:05:30.828940",
+      "query": "error conexi\u00f3n aplicaci\u00f3n cliente basic plan",
+      "latency_ms": 1748.25,
+      "similarity_scores": [
+        0.8,
+        0.8
+      ],
+      "fallback_used": "semantic",
+      "response_length": 368,
+      "results_count": 2,
+      "error": null
+    },
+    {
+      "timestamp": "2025-08-18T19:06:40.528812",
+      "query": "problema cr\u00edtico servidor cliente",
+      "latency_ms": 1396.64,
+      "similarity_scores": [
+        0.8,
+        0.8
+      ],
+      "fallback_used": "semantic",
+      "response_length": 368,
+      "results_count": 2,
+      "error": null
+    },
+    {
+      "timestamp": "2025-08-18T19:07:36.457032",
+      "query": "fallo total sistema cliente VIP",
+      "latency_ms": 1885.97,
+      "similarity_scores": [
+        0.8,
+        0.8
+      ],
+      "fallback_used": "semantic",
+      "response_length": 368,
+      "results_count": 2,
+      "error": null
+    },
+    {
+      "timestamp": "2025-08-18T19:08:40.161503",
+      "query": "problema escalabilidad cliente empresa grande",
+      "latency_ms": 1336.42,
+      "similarity_scores": [
+        0.8,
+        0.8
+      ],
+      "fallback_used": "semantic",
+      "response_length": 368,
+      "results_count": 2,
+      "error": null
+    },
+    {
+      "timestamp": "2025-08-18T19:10:09.268811",
+      "query": "problema escalabilidad cliente empresa grande",
+      "latency_ms": 1443.76,
+      "similarity_scores": [
+        0.8,
+        0.8
+      ],
+      "fallback_used": "semantic",
+      "response_length": 368,
+      "results_count": 2,
+      "error": null
+    },
+    {
+      "timestamp": "2025-08-18T19:11:33.434980",
+      "query": "error configuraci\u00f3n cliente startup",
+      "latency_ms": 1433.91,
+      "similarity_scores": [
+        0.8,
+        0.8
+      ],
+      "fallback_used": "semantic",
+      "response_length": 368,
+      "results_count": 2,
+      "error": null
+    },
+    {
+      "timestamp": "2025-08-18T19:13:22.982347",
+      "query": "problema integraci\u00f3n cliente multinacional",
+      "latency_ms": 1338.76,
+      "similarity_scores": [
+        0.8,
+        0.8
+      ],
+      "fallback_used": "semantic",
+      "response_length": 368,
+      "results_count": 2,
+      "error": null
+    },
+    {
+      "timestamp": "2025-08-18T19:15:40.395185",
+      "query": "ayuda urgente sistema cliente",
+      "latency_ms": 1232.85,
+      "similarity_scores": [
+        0.8,
+        0.8
+      ],
+      "fallback_used": "semantic",
+      "response_length": 368,
+      "results_count": 2,
+      "error": null
+    }
+  ],
+  "summary": {
+    "total_queries": 26,
+    "error_count": 0,
+    "last_updated": "2025-08-18T19:15:40.395576",
+    "avg_latency": 1553.5163636363636
+  }
+}

@@ -1,0 +1,205 @@
+{
+  "metrics": [
+    {
+      "timestamp": "2025-08-18T19:24:37.243911",
+      "query": "Servidor de producci\u00f3n ca\u00eddo",
+      "latency_ms": 4902.06,
+      "similarity_scores": [
+        0.8,
+        0.8
+      ],
+      "fallback_used": "semantic",
+      "response_length": 368,
+      "results_count": 2,
+      "error": null
+    },
+    {
+      "timestamp": "2025-08-18T19:25:21.744414",
+      "query": "Sistema facturaci\u00f3n no funciona afectando ventas",
+      "latency_ms": 1442.81,
+      "similarity_scores": [
+        0.8,
+        0.8
+      ],
+      "fallback_used": "semantic",
+      "response_length": 368,
+      "results_count": 2,
+      "error": null
+    },
+    {
+      "timestamp": "2025-08-18T19:26:14.119921",
+      "query": "Base de datos principal corrupta",
+      "latency_ms": 1433.05,
+      "similarity_scores": [
+        0.8,
+        0.8
+      ],
+      "fallback_used": "semantic",
+      "response_length": 368,
+      "results_count": 2,
+      "error": null
+    },
+    {
+      "timestamp": "2025-08-18T19:27:12.216335",
+      "query": "Error 500 aplicaci\u00f3n",
+      "latency_ms": 1268.9,
+      "similarity_scores": [
+        0.8,
+        0.8
+      ],
+      "fallback_used": "semantic",
+      "response_length": 368,
+      "results_count": 2,
+      "error": null
+    },
+    {
+      "timestamp": "2025-08-18T19:28:42.063531",
+      "query": "Backup fall\u00f3",
+      "latency_ms": 2312.19,
+      "similarity_scores": [
+        0.8,
+        0.8
+      ],
+      "fallback_used": "semantic",
+      "response_length": 368,
+      "results_count": 2,
+      "error": null
+    },
+    {
+      "timestamp": "2025-08-18T19:29:59.584581",
+      "query": "Firewall comprometido",
+      "latency_ms": 1641.28,
+      "similarity_scores": [
+        0.8,
+        0.8
+      ],
+      "fallback_used": "semantic",
+      "response_length": 368,
+      "results_count": 2,
+      "error": null
+    },
+    {
+      "timestamp": "2025-08-18T19:31:29.326086",
+      "query": "API pagos ca\u00edda",
+      "latency_ms": 1447.06,
+      "similarity_scores": [
+        0.8,
+        0.8
+      ],
+      "fallback_used": "semantic",
+      "response_length": 368,
+      "results_count": 2,
+      "error": null
+    },
+    {
+      "timestamp": "2025-08-18T19:33:30.877940",
+      "query": "Certificados SSL expiran",
+      "latency_ms": 1728.76,
+      "similarity_scores": [
+        0.8,
+        0.8
+      ],
+      "fallback_used": "semantic",
+      "response_length": 368,
+      "results_count": 2,
+      "error": null
+    },
+    {
+      "timestamp": "2025-08-18T19:35:13.395799",
+      "query": "configuraci\u00f3n par\u00e1metros usuario",
+      "latency_ms": 1645.94,
+      "similarity_scores": [
+        0.8,
+        0.8
+      ],
+      "fallback_used": "semantic",
+      "response_length": 368,
+      "results_count": 2,
+      "error": null
+    },
+    {
+      "timestamp": "2025-08-18T19:36:39.076947",
+      "query": "funcionamiento m\u00f3dulo reportes",
+      "latency_ms": 1703.16,
+      "similarity_scores": [
+        0.8,
+        0.8
+      ],
+      "fallback_used": "semantic",
+      "response_length": 368,
+      "results_count": 2,
+      "error": null
+    },
+    {
+      "timestamp": "2025-08-18T19:37:56.176370",
+      "query": "procedimiento backup",
+      "latency_ms": 1419.01,
+      "similarity_scores": [
+        0.8,
+        0.8
+      ],
+      "fallback_used": "semantic",
+      "response_length": 368,
+      "results_count": 2,
+      "error": null
+    },
+    {
+      "timestamp": "2025-08-18T19:39:56.619630",
+      "query": "configuraci\u00f3n perfil administrador",
+      "latency_ms": 1453.63,
+      "similarity_scores": [
+        0.8,
+        0.8
+      ],
+      "fallback_used": "semantic",
+      "response_length": 368,
+      "results_count": 2,
+      "error": null
+    },
+    {
+      "timestamp": "2025-08-18T19:40:50.497116",
+      "query": "horarios mantenimiento programado",
+      "latency_ms": 1443.16,
+      "similarity_scores": [
+        0.8,
+        0.8
+      ],
+      "fallback_used": "semantic",
+      "response_length": 368,
+      "results_count": 2,
+      "error": null
+    },
+    {
+      "timestamp": "2025-08-18T19:42:21.306656",
+      "query": "capacitaci\u00f3n nuevo sistema",
+      "latency_ms": 1503.19,
+      "similarity_scores": [
+        0.8,
+        0.8
+      ],
+      "fallback_used": "semantic",
+      "response_length": 368,
+      "results_count": 2,
+      "error": null
+    },
+    {
+      "timestamp": "2025-08-18T19:44:06.460418",
+      "query": "documentaci\u00f3n t\u00e9cnica API",
+      "latency_ms": 3050.63,
+      "similarity_scores": [
+        0.8,
+        0.8
+      ],
+      "fallback_used": "semantic",
+      "response_length": 368,
+      "results_count": 2,
+      "error": null
+    }
+  ],
+  "summary": {
+    "total_queries": 15,
+    "error_count": 0,
+    "last_updated": "2025-08-18T19:44:06.461671",
+    "avg_latency": 1892.9886666666669
+  }
+}

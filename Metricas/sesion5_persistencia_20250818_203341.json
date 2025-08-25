@@ -1,0 +1,49 @@
+{
+  "metrics": [
+    {
+      "timestamp": "2025-08-18T20:23:28.778310",
+      "query": "fallo de conexi\u00f3n a base de datos en sistema de facturaci\u00f3n",
+      "latency_ms": 1620.85,
+      "similarity_scores": [
+        0.8,
+        0.8
+      ],
+      "fallback_used": "semantic",
+      "response_length": 368,
+      "results_count": 2,
+      "error": null
+    },
+    {
+      "timestamp": "2025-08-18T20:27:51.799058",
+      "query": "problema de conexi\u00f3n de base de datos CUST_001",
+      "latency_ms": 1475.3,
+      "similarity_scores": [
+        0.8,
+        0.8
+      ],
+      "fallback_used": "semantic",
+      "response_length": 368,
+      "results_count": 2,
+      "error": null
+    },
+    {
+      "timestamp": "2025-08-18T20:29:08.936878",
+      "query": "CUST_001 problema de conexi\u00f3n de base de datos descripci\u00f3n del problema",
+      "latency_ms": 1328.9,
+      "similarity_scores": [
+        0.8,
+        0.8
+      ],
+      "fallback_used": "semantic",
+      "response_length": 368,
+      "results_count": 2,
+      "error": null
+    }
+  ],
+  "summary": {
+    "total_queries": 30,
+    "error_count": 0,
+    "last_updated": "2025-08-18T20:29:08.937812",
+    "avg_latency": 1475.0166666666667
+  }
+}
